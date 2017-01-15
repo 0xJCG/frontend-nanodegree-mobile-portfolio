@@ -398,18 +398,11 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
-// The idea is to have an array of all the pizzas always because it's expensive to get all the pizzas every
-// time we want to change the size of the image.
-// This array will be filled when each pizza is generated.
-var pizzas = [];
-var pizzasAux = document.querySelectorAll(".randomPizzaContainer"); // Getting the hardcoded 2.
-pizzas[0] = pizzasAux[0];
-pizzas[1] = pizzasAux[1];
-
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
+  var pizzas = document.querySelectorAll(".randomPizzaContainer");
   var pizzasLength = pizzas.length;
   var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
   var oldSize = pizzas[0].offsetWidth / windowWidth;
@@ -434,32 +427,27 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (size) {
+  function newPercentage(size) {
     // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
-      switch(size) {
+    switch(size) {
         case "1":
-          return 0.25;
+            return '25%';
         case "2":
-          return 0.3333;
+            return '33%';
         case "3":
-          return 0.5;
+            return '50%';
         default:
-          console.log("bug in sizeSwitcher");
-      }
+            console.log("bug in sizeSwitcher");
     }
-
-    var newSize = sizeSwitcher(size);
-    return (newSize - oldSize) * windowWidth;
+    return '33%';
   }
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    var dx = determineDx(size);
+    var dx = newPercentage(size);
     for (var i = 0; i < pizzasLength; i++) {
       var pizza = pizzas[i];
-      var newWidth = (pizza.offsetWidth + dx) + 'px';
-      pizza.style.width = newWidth;
+      pizza.style.width = dx;
     }
   }
 
@@ -477,9 +465,7 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
-  var p = pizzaElementGenerator(i);
-  pizzasDiv.appendChild(p);
-  pizzas[i] = p; // Adding each pizza to the array in memory.
+  pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
