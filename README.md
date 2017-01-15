@@ -1,3 +1,58 @@
+# Optimizations
+
+## index.html
+
+*Added media to the print css.
+*Inline and minimized screen css.
+*Async to the scripts and moved to the end.
+*Deleted the font.
+*Optimized and reduced images.
+
+## Pizza part
+
+### Scroll
+
+Line 506:
+```
+var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+```
+
+What I have done is take ```document.body.scrollTop``` out of the loop in a new variable.
+
+### Pizza sizes
+
+```
+// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
+function determineDx (elem, size) {
+    var oldWidth = elem.offsetWidth;
+    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+    var oldSize = oldWidth / windowWidth;
+
+    // Changes the slider value to a percent width
+    function sizeSwitcher (size) {
+        switch(size) {
+            case "1":
+                return 0.25;
+            case "2":
+                return 0.3333;
+            case "3":
+                return 0.5;
+            default:
+                console.log("bug in sizeSwitcher");
+        }
+    }
+
+    var newSize = sizeSwitcher(size);
+    var dx = (newSize - oldSize) * windowWidth;
+
+    return dx;
+}
+```
+
+All that code changed to only return percentages directly and it isn't necessary to pass an element, all the pizzas are equal. Of course, there are more changes for that code to correctly perform in the next function.
+
+# Original project
+
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
