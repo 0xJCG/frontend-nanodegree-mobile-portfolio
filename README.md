@@ -2,11 +2,11 @@
 
 ## index.html
 
-*Added media to the print css.
-*Inline and minimized screen css.
-*Async to the scripts and moved to the end.
-*Deleted the font.
-*Optimized and reduced images.
+* Added media to the print css.
+* Inline and minimized screen css.
+* Async to the scripts and moved to the end.
+* Deleted the font.
+* Optimized and reduced images.
 
 ## Pizza part
 
@@ -22,7 +22,6 @@ What I have done is take ```document.body.scrollTop``` out of the loop in a new 
 ### Pizza sizes
 
 ```
-// Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
 function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
