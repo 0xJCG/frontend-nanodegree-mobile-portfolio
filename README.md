@@ -1,5 +1,15 @@
 # Optimizations
 
+The purpose of the nanograde is to learn how to perform website performance optimizations.
+
+This is the link for of this nanograde: https://www.udacity.com/course/website-performance-optimization--ud884.
+
+This repository is the final project of the grade. We had to perform optimizations of [the original project](https://github.com/udacity/frontend-nanodegree-mobile-portfolio):
+* The PageSpeed score of 90 is for index.html (both mobile and laptop scores should be at least 90).
+* The frame rate of 60 fps should be obtained for the pizza page (views/pizza.html) and the time to resize the pizzas should be less than 5 ms.
+
+These are the optimizations I've done to ensure the performance.
+
 ## index.html
 
 * Added media to the print css.
