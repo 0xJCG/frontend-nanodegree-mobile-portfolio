@@ -401,7 +401,10 @@ var pizzaElementGenerator = function(i) {
 // The idea is to have an array of all the pizzas always because it's expensive to get all the pizzas every
 // time we want to change the size of the image.
 // This array will be filled when each pizza is generated.
-var pizzas = document.querySelectorAll(".randomPizzaContainer"); // Getting the hardcoded 2.
+var pizzas = [];
+var pizzasAux = document.querySelectorAll(".randomPizzaContainer"); // Getting the hardcoded 2.
+pizzas[0] = pizzasAux[0];
+pizzas[1] = pizzasAux[1];
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
